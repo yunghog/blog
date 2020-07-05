@@ -1,7 +1,11 @@
 var express = require('express');
 var app = express();
-app.get('/', function (req, res) {
-res.send('<h1>Open Source For You!</h1>');
+var router = express.Router();
+var path = __dirname + '/views/';
+app.use('/',router);
+
+router.get('/',function(req, res){
+  res.sendFile(path + 'index.html');
 });
 app.listen(3030, function () {
 console.log('Example app listening on port 3030!');
