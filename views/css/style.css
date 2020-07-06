@@ -1,0 +1,68 @@
+body{
+background-color: #eee;
+font-family: "nexal";
+}
+header{
+  position: absolute;
+  top: 0;
+  z-index: 3;
+  width: 100%;
+}
+@font-face {
+    src: url("../fonts/nexal.otf");
+    font-family: 'nexal';
+}
+@font-face {
+    src: url("../fonts/nexab.otf");
+    font-family: 'nexab';
+}
+h1, h2, h3, h4, h5, h6{
+  font-family: 'nexab';
+  font-weight: 900;
+  text-transform: uppercase;
+}
+h1{
+  font-size: 50px;
+}
+p{
+  text-align: justify;
+}
+nav{
+  font-family: 'nexab';
+}
+.overlay{
+  top: 0;
+  /* z-index: -1; */
+  /* position: absolute; */
+  width: 100%;
+  height: 720px;
+  margin: 0px;
+  background-color : #ff006d;
+  background-blend-mode: multiply;
+  /* background-image: url("../images/hero1.png"); */
+  background-size: cover;
+  background-position: center;
+}
+.canvas{
+  position: absolute;
+  z-index: 2;
+  top: 200px;
+  color: #fff;
+  animation: fadeup 2s ease;
+  left: 10%;
+}
+@keyframes fadeup {
+  from{
+    opacity: 0;
+    padding-left: 50px;
+  }
+  to{
+    opacity: 1;
+    padding: 0;
+  }
+}
+@media screen and (max-width: 720px) {
+  header{
+    background-color: #333;
+  }
+}
