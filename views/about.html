@@ -10,8 +10,9 @@
     <link rel="icon" href="images/logo.png" width="64px">
     <script type="text/javascript" src="index.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
-  <body>
+  <body onload="addComponents()">
     <div class="content-wrap">
       <header id="header"></header>
       <section>
@@ -20,9 +21,9 @@
             <div class="col-12 ">
               <div class="overlay" style="background-image: url('images/hero1.png')"></div>
               <div class="canvas">
-                <p>hello! welcome to</p>
-                <h1>Creed thoughts</h1>
-                <h5>tech, cars, coding, gaming,  ...</h5>
+                <!-- <p>hello! welcome to</p> -->
+                <h1>About</h1>
+                <h5>Creed thoughts</h5>
               </div>
             </div>
           </div>
@@ -33,26 +34,39 @@
         <div class="container">
           <div class="row">
             <div class="col">
-              <h3>Browse Topics</h3>
+              <h3>The name "CREED THOUGHTS"</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <p>I have been a fan of the show "THE OFFICE". In the show a character "CREED" had setup up
+                a blog, in which he shares all the wierd things
+              in his daily life. The name of the blog was "CREED THOUGHTS". I took reference from that :)</p>
+            </div>
+            <div class="col-md-6 text-center">
+              <img src="images/img1.jpg" alt="creed thoughts" width="90%">
             </div>
           </div>
         </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-3">
-
-            </div>
-          </div>
         </div>
       </section>
     </div>
+    <br>
     <footer id="footer"></footer>
     <script type="text/javascript">
  $(function(){
  $("#header").load("components/header.html");
- $("#footer").load("components/footer.html");
- $("#home").classList.add("active");
+ $("#footer").load("components/footer.html"); 
+
  });
+   </script>
+   <script type="text/javascript">
+     document.getElementById("home").classList.add("active");
+   </script>
+   <script type="text/javascript">
+      function addComponents() {
+
+      }
    </script>
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

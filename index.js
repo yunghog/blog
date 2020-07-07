@@ -8,6 +8,11 @@ app.use(express.static(__dirname + '/views'));
 router.get('/',function(req, res){
   res.sendFile(path + 'index.html');
 });
+
+router.get('/about',function(req, res){
+  res.sendFile(path + 'about.html');
+});
+
 app.listen(3030, function () {
 console.log('Example app listening on port 3030!');
 });
