@@ -28,6 +28,10 @@ router.get('/subscription',function(req, res){
 router.get('/about',function(req, res){
   res.sendFile(path + 'about.html');
 });
+router.get('/contact',function(req, res){
+  res.sendFile(path + 'contact.html');
+});
+
 app.post('/mailingList', urlencodedParser, function (req, res) {
    response = {
       email:req.body.email
