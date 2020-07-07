@@ -117,6 +117,13 @@ nav{
   letter-spacing: 2px;
   border-radius: 0px;
 }
+.btn1{
+  color: #ff006d;
+  background-color: #eee;
+}
+.btn1:hover, .btn:active{
+  box-shadow: 0 0 10px #ff006d;
+}
 .mailing button{
   background-color: #222;
   color: #ff006d;
