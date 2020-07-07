@@ -176,3 +176,10 @@ nav{
   font-size: 12px;
   text-align: center;
 }
+.social-dark a{
+  color: #222;
+}
+.social-dark a:hover{
+  background-color: #222;
+  color: #ff006d !important;
+}
