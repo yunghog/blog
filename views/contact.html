@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Creed Thoughts</title>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/logo.png" width="64px">
+    <script type="text/javascript" src="index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body onload="addComponents()">
+    <div class="content-wrap">
+      <header id="header"></header>
+      <section>
+        <div class="container-fluid" style="padding:0px">
+          <div class="row no-gutters">
+            <div class="col-12 ">
+              <div class="overlay" style="background-image: url('images/hero1.png')"></div>
+              <div class="canvas">
+                <!-- <p>hello! welcome to</p> -->
+                <h1>Contact</h1>
+                <h5>Get in touch with us</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <br>
+      <section>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="row">
+                <div class="col-12">
+                  <h3>Send Email</h3>
+                </div>
+              </div>
+              <form class="form-control2" action="/sendMail" method="post">
+                <div class="row">
+                  <div class="col-12">
+                    <input type="text" name="name" value="" placeholder="name" required>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <input type="email" name="email" value="" placeholder="email id" required>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <textarea name="query" rows="8" cols="80" placeholder="query"></textarea>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-11 text-center">
+                    <button class="btn btn2" type="submit">Send Mail</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-md-4 text-center">
+            </div>
+          </div>
+        </div>
+        </div>
+      </section>
+    </div>
+    <br>
+    <footer id="footer"></footer>
+    <script type="text/javascript">
+ $(function(){
+ $("#header").load("components/header.html");
+ $("#footer").load("components/footer.html");});
+   </script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
