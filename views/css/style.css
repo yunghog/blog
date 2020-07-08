@@ -183,3 +183,27 @@ nav{
   background-color: #222;
   color: #ff006d !important;
 }
+a:hover{
+  text-decoration: none !important;
+}
+.topic{
+
+}
+.topic button{
+  margin: 5px;
+  padding: 5px 10px 5px 10px;
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+  border: 1px solid #ff006d;
+  border-radius: 20px;
+  color: #222;
+  text-decoration: none !important;
+  box-shadow: 0 0 10px #2225;
+}
+.topic button:hover{
+  box-shadow: 0 0 10px #ff006d;
+  color: #eee;
+  background-color: #222;
+}
