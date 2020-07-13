@@ -207,3 +207,27 @@ a:hover{
   color: #eee;
   background-color: #222;
 }
+.blog-img-1{
+  width: 100%;
+  overflow-x: hidden;
+  text-align: center;
+}
+.blog-img-1 img{
+  min-width: 100%;
+  height: auto;
+}
+.text-small{
+  font-size: 12px !important;
+}
+.blog-text-1 ul{
+  list-style-type: none;
+  padding: 0 0 0 5px;
+}
+.blog-text-1 ul a{
+  padding: 2px;
+  color: #ff006d;
+}
+.blog-text-1 ul a:hover{
+  color: #ff006d;
+  background-color: #222;
+}

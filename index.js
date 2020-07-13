@@ -3,6 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var router = express.Router();
 var nodemailer = require('nodemailer');
+app.set('view engine', 'ejs')
 var MongoClient = require('mongodb').MongoClient;
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -21,7 +22,15 @@ app.use('/',router);
 app.use(express.static(__dirname + '/views'));
 
 router.get('/',function(req, res){
-  res.sendFile(path + 'index.html');
+  MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client) => {
+    if (err) return console.error(err);
+    const db = client.db('creedthoughts');
+    const subsCollection = db.collection('subscribers');
+    subsCollection.find().toArray()
+    .then(results=>{
+      res.render('index.ejs',{subs:results})
+    })
+  });
 });
 router.get('/subscription',function(req, res){
   res.sendFile(path + 'subscription.html');
