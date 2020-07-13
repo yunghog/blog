@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+const session = require('express-session');
 var bodyParser = require('body-parser');
 var router = express.Router();
 var nodemailer = require('nodemailer');
@@ -20,7 +21,11 @@ var transporter = nodemailer.createTransport({
 var path = __dirname + '/views/';
 app.use('/',router);
 app.use(express.static(__dirname + '/views'));
-
+app.use(session({
+   secret: 'login',
+  resave: true,
+  saveUninitialized: true
+}));
 router.get('/',function(req, res){
   MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client) => {
     if (err) return console.error(err);
@@ -35,13 +40,19 @@ router.get('/',function(req, res){
 router.get('/subscription',function(req, res){
   res.sendFile(path + 'subscription.html');
 });
+router.get('/login',function(req, res){
+  res.render('login.ejs',{alert:0,msg:''});
+});
 router.get('/about',function(req, res){
   res.sendFile(path + 'about.html');
 });
 router.get('/contact',function(req, res){
   res.sendFile(path + 'contact.html');
 });
-
+router.get('/admin',function(req, res){
+  var username=req.session.var;
+  res.render('admin.ejs',{user:username});
+});
 app.post('/mailingList', urlencodedParser,(req, res) => {
    response = {email:req.body.email};
    mailOptions={
@@ -67,6 +78,29 @@ app.post('/mailingList', urlencodedParser,(req, res) => {
       });
     });
    res.redirect('/subscription');
+});
+app.post('/auth', urlencodedParser,(req, res)=>{
+  username=req.body.username;
+  password=req.body.password;
+  MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client)=>{
+    if(err) return console.error(err);
+    const db = client.db('creedthoughts');
+    const admin = db.collection('admin');
+    var query = { "username": username, "password": password };
+    admin.find(query).count(function(err, result) {
+    if (err) throw err;
+    if(result==1){
+      // window.alert('Login Success');
+      req.session.var=username;
+      res.redirect('/admin');
+    }
+    else {
+      // window.alert('Invalid Credentials');
+      res.render('login.ejs', {alert:1, msg:'Invalid Credentials'});
+    }
+  });
+  })
+
 });
 app.listen(3030, function () {
 console.log('Example app listening on port 3030!');

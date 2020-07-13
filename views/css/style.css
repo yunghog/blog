@@ -120,7 +120,7 @@ nav{
 .btn{
   border: none;
   text-transform: uppercase;
-  font-family: "nexal";
+  font-family: "nexab";
   font-size: 12px;
   padding: 5px 10px 5px 10px;
   letter-spacing: 2px;
@@ -230,4 +230,19 @@ a:hover{
 .blog-text-1 ul a:hover{
   color: #ff006d;
   background-color: #222;
+}
+.login-form{
+  left: 5%;
+  position: absolute;
+  top: 200px;
+  width: 90%;
+  text-align: center;
+}
+.login-form form{
+  background-color: #2225;
+  padding: 20px;
+  border-radius: 20px;
+}
+.login-form h3{
+  color:#eee;
 }
