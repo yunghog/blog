@@ -22,7 +22,6 @@ var path = __dirname + '/views/';
 app.use('/',router);
 app.use(express.static(__dirname + '/views'));
 app.use(session({
-   secret: 'login',
   resave: true,
   saveUninitialized: true
 }));
