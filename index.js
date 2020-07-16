@@ -91,7 +91,7 @@ app.post('/auth', urlencodedParser,(req, res)=>{
     if (err) throw err;
     if(result==1){
       // window.alert('Login Success');
-      req.session.var=username;
+      req.session.var={'username':username};
       res.redirect('/admin');
     }
     else {
