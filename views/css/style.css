@@ -301,3 +301,7 @@ a:hover{
   font-size: 12px;
 
 }
+.dropdown-item.active, .dropdown-item:active{
+  background-color: #ff006d;
+  color: #eee;
+}
