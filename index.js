@@ -21,6 +21,7 @@ var transporter = nodemailer.createTransport({
 var path = __dirname + '/views/';
 app.use('/',router);
 app.use(express.static(__dirname + '/views'));
+app.set('views', [__dirname+'/views/admin/',__dirname+'/views'])
 app.use(session({
   secret: 'login form',
   resave: true,
@@ -109,6 +110,13 @@ app.get('/admin', function(req, res) {
 		res.render('admin/admin.ejs', {loggedin: true, user: req.session.user});
 	} else {
     res.render('admin/admin.ejs', {loggedin: false});
+	}
+});
+app.get('/admin/create_post', function(req, res) {
+	if (req.session.loggedin) {
+		res.render('create_post.ejs', {loggedin: true, user: req.session.user});
+	} else {
+    res.render('create_post.ejs', {loggedin: false});
 	}
 });
 app.post('/logout',function(req,res){
