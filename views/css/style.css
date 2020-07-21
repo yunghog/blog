@@ -9,6 +9,7 @@ header{
   top: 0;
   z-index: 3;
   width: 100%;
+  transition: 1s ;
 }
 .content-wrap {
   padding-bottom: 20rem;    /* Footer height */
@@ -34,6 +35,14 @@ footer {
   }
   footer{
     height: 30rem;
+  }
+}
+.footer-admin{
+  height: 5rem !important;
+}
+@media screen and (max-width:768px) {
+  .footer-admin{
+    height: 7rem !important;
   }
 }
 @font-face {
@@ -118,7 +127,7 @@ nav{
   box-shadow: 0 0 25px #2221;
 }
 .btn{
-  border: none;
+  border: 2px solid #0000;
   text-transform: uppercase;
   font-family: "nexab";
   font-size: 12px;
@@ -132,6 +141,7 @@ nav{
 }
 .btn1:hover, .btn1:active{
   box-shadow: 0 0 10px #ff006d;
+  border: 2px solid #ff006d;
 }
 .btn2{
   color: #ff006d;
@@ -139,6 +149,7 @@ nav{
 }
 .btn2:hover, .btn2:active{
   box-shadow: 0 0 10px #ff006d;
+  border: 2px solid #ff006d;
 }
 .mailing button{
   background-color: #222;
@@ -245,4 +256,48 @@ a:hover{
 }
 .login-form h3{
   color:#eee;
+}
+.btn-card{
+  margin: 15px;
+  padding: 10px;
+  height: 100px;
+  box-shadow: 0 0 20px #aaa;
+  border-radius: 10px;
+  border-left: 10px solid #ff006d;
+  text-align: center;
+  font-size: 22px;
+  font-family: 'nexab';
+  text-transform: uppercase;
+  color: #ff006d;
+}
+.dropdown-menu{
+  animation: fade .5s ease;
+}
+@keyframes fade {
+  0%{
+    top: 60px;
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+.sticky-header{
+  position: fixed !important;
+  top:0px;
+  background-color: #333 !important;
+  animation: header_anim 1s ease;
+}
+@keyframes header_anim {
+  0%{
+    top: -100px;
+  }
+  100%{
+    top:0px;
+  }
+}
+.user-details label{
+  font-family: 'nexal';
+  font-size: 12px;
+
 }
