@@ -8,24 +8,18 @@
 
       <div class="collapse navbar-collapse mr-0" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-          <!-- <li class="nav-item dropdown active">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-user"></i>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <div class="dropdown-item" href="#">
-                <div class="user-details">
-                  <label for="">Logged in as</label>
-                  <span id="name_"></span> <br> <span id="username_"> </span>
-                </div>
-              </div>
-            </div>
-          </li> -->
           <li class="nav-item" id="admin">
             <a class="nav-link" href="/admin/">Admin </a>
           </li>
           <li class="nav-item" id="home">
             <a class="nav-link" target="_blank" href="/">Site </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Posts</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/admin/create_post">Create Post</a>
+              <a class="dropdown-item" href="#">View Posts</a>
+            </div>
           </li>
           <li><a class="nav-link" target="_blank" href="/"><form class="" action="/logout" method="post">
           <button class="btn btn1" type="submit" name="logout">Logout</button>
@@ -38,6 +32,7 @@
 <script type="text/javascript">
   $(document).ready(function(){
     $('a[href="' + this.location.pathname + '"]').parents('li,ul').addClass('active');
+    $('a[href="' + this.location.pathname + '"]').addClass('active');
   })
 </script>
 <script type="text/javascript">
