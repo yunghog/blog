@@ -49,10 +49,7 @@ router.get('/about',function(req, res){
 router.get('/contact',function(req, res){
   res.sendFile(path + 'contact.html');
 });
-router.get('/admin',function(req, res){
-  var username=req.session.var;
-  res.render('admin.ejs',{user:username});
-});
+
 app.post('/mailingList', urlencodedParser,(req, res) => {
    response = {email:req.body.email};
    mailOptions={
@@ -91,8 +88,14 @@ app.post('/auth', urlencodedParser,(req, res)=>{
     if (err) throw err;
     if(result==1){
       // window.alert('Login Success');
-      req.session.var={'username':username};
-      res.redirect('/admin');
+      admin.find(query).toArray(function(err, user){
+        // console.log(user[0].username);
+        user_json={username:user[0].username, name:user[0].name}
+        req.session.user=user_json;
+        req.session.loggedin=true;
+        res.redirect('/admin');
+      });
+
     }
     else {
       // window.alert('Invalid Credentials');
@@ -100,7 +103,17 @@ app.post('/auth', urlencodedParser,(req, res)=>{
     }
   });
   })
-
+});
+app.get('/admin', function(req, res) {
+	if (req.session.loggedin) {
+		res.render('admin/admin.ejs', {loggedin: true, user: req.session.user});
+	} else {
+    res.render('admin/admin.ejs', {loggedin: false});
+	}
+});
+app.post('/logout',function(req,res){
+  req.session.loggedin=false;
+  res.render('login.ejs', {alert:0, msg:''});
 });
 app.listen(3030, function () {
 console.log('Example app listening on port 3030!');
