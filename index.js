@@ -2,12 +2,14 @@ var express = require('express');
 var app = express();
 const session = require('express-session');
 var bodyParser = require('body-parser');
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/posts' })
 var router = express.Router();
 var nodemailer = require('nodemailer');
 app.set('view engine', 'ejs')
 var MongoClient = require('mongodb').MongoClient;
 
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var urlencodedParser = bodyParser.urlencoded({ extended: true })
 var transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
@@ -130,9 +132,27 @@ app.get('/admin/create_post', function(req, res) {
     res.render('create_post.ejs', {loggedin: false});
 	}
 });
+app.post('/insert_post',upload.single('blog_image'),(req,res)=>{
+    console.log(req.file, req.body);
+     data = {
+       heading:req.body.heading,
+       body: req.body.body
+     };
+      MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client) => {
+        if (err) return console.error(err);
+        console.log('Connected to Database');
+        const db = client.db('creedthoughts');
+        const blogs = db.collection('blog');
+        blogs.insertOne({
+          "heading":req.body.heading,
+          "body":req.body.body
+      });
+      });
+     res.redirect('/admin/create_post');
+});
 app.post('/logout',function(req,res){
   req.session.loggedin=false;
-  res.render('login.ejs', {alert:0, msg:''});
+  res.redirect('/login');
 });
 app.listen(3030, function () {
 console.log('Example app listening on port 3030!');
