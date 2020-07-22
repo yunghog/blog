@@ -100,7 +100,7 @@ app.post('/auth', urlencodedParser,(req, res)=>{
     }
     else {
       // window.alert('Invalid Credentials');
-      res.render('login.ejs', {alert:1, msg:'Invalid Credentials'});
+      res.redirect('/login');
     }
   });
   })
@@ -114,7 +114,18 @@ app.get('/admin', function(req, res) {
 });
 app.get('/admin/create_post', function(req, res) {
 	if (req.session.loggedin) {
-		res.render('create_post.ejs', {loggedin: true, user: req.session.user});
+    MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client)=>{
+      if(err) return console.error(err);
+      const db = client.db('creedthoughts');
+      const topic = db.collection('topic');
+      topic.find().toArray(function(err, topic_result) {
+      if (err) throw err;
+        vars_json={
+          topics: topic_result
+        };
+        res.render('create_post.ejs', {loggedin: true, user: req.session.user, vars:vars_json});
+    });
+    })
 	} else {
     res.render('create_post.ejs', {loggedin: false});
 	}
