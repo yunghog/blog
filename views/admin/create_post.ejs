@@ -45,7 +45,7 @@ if(loggedin){
           <div class="row">
             <div class="col-md-8">
               <div class="form-con">
-                <form class="form-control2" action="index.html" method="post" enctype="multipart/form-data">
+                <form class="form-control2" action="/insert_post" method="post" enctype="multipart/form-datas" >
                   <div class="row">
                     <div class="col-12">
                       <label for="heading">Heading*</label>
@@ -61,7 +61,7 @@ if(loggedin){
                   <div class="row">
                     <div class="col-12">
                       <label class="">Image</label>
-                      <input type="file" name="image" value="">
+                      <input type="file" name="blog_image" value="">
                     </div>
                   </div>
                   <div class="row">
@@ -88,13 +88,18 @@ if(loggedin){
                       <div class="row">
                         <div class="col-6">
                           <label>Text-1</label>
-                          <input type="text" name="text_1">
+                          <input type="text" name="link[0][text]">
                         </div>
                         <div class="col-6">
                           <label>Address-1</label>
-                          <input type="text" name="address_1">
+                          <input type="text" name="link[0][address]">
                         </div>
                       </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 text-center">
+                      <button type="submit" name="post" class="btn btn2" >Post</button>
                     </div>
                   </div>
                 </form>
@@ -136,25 +141,25 @@ if(loggedin){
     function add_fields(){
       var num = document.getElementById('num').value;
       var con = document.getElementById('res-con');
-      con.innerHTML
-      for(i=2;i<=num;i++){
+      con.innerHTML="";
+      for(i=1;i<=num;i++){
         var j=1;
         var row = document.createElement('div');
         row.classList.add("row");
         row.id="row"+i;
         var col1 = document.createElement('div');
         col1.classList.add("col-6");
-        col1.id="col"+i+'_'+j;
+        // col1.id="col"+i+'_'+j;
         j++;
         var col2 = document.createElement('div');
         col2.classList.add("col-6");
-        col2.id="col"+i+'_'+j;
+        // col2.id="col"+i+'_'+j;
         var input1=document.createElement("input");
         input1.type="text";
-        input1.name="text_"+i;
+        input1.name="link["+i+"][text]";
         var input2=document.createElement("input");
         input2.type="text";
-        input2.name="address_"+i;
+        input2.name="link["+i+"][address]";
         var label1=document.createElement("label");
         label1.innerHTML="Text- "+i;
         var label2=document.createElement("label");
@@ -166,6 +171,11 @@ if(loggedin){
         col1.append(input1);
         col2.append(label2);
         col2.append(input2);
+        $('input').on('focusin', function() {
+        $(this).parent().find('label').addClass('active-label');});
+        $('input').on('focusout', function() {
+         if (!this.value) {
+         $(this).parent().find('label').removeClass('active-label');}});
       }
     }
   </script>
