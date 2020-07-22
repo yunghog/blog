@@ -108,22 +108,22 @@ nav{
     background-color: #333;
   }
 }
-.form-control2 input{
-  padding: 5px;
+.form-control2 input, select{
+  padding: 10px;
   width: 90%;
   background-color: #fffa;
   color: #222;
   border: none;
-  margin: 5px 0 5px 0;
+  margin: 10px 0 10px 0;
   box-shadow: 0 0 25px #2221;
 }
 .form-control2 textarea{
-  padding: 5px;
+  padding: 10px;
   width: 90%;
   background-color: #fffa;
   color: #222;
   border: none;
-  margin: 5px 0 5px 0;
+  margin: 10px 0 10px 0;
   box-shadow: 0 0 25px #2221;
 }
 .btn{
@@ -304,4 +304,35 @@ a:hover{
 .dropdown-item.active, .dropdown-item:active{
   background-color: #ff006d;
   color: #eee;
+}
+.form-control2 label {
+  position: absolute;
+  top: 5px;
+  font-size: 18px;
+  margin: 10px;
+  padding: 0 10px;
+  transition: .2s ease-in-out,  font-size .2s ease-in-out;
+}
+.active-label{
+  color: #ff006d;
+  background-color: #fff;
+  top: -10px  !important;
+  font-size: 12px !important;
+  letter-spacing: 2px;
+}
+input:focus, select:focus {
+  outline: 1px solid #ff006d;
+}
+textarea:focus {
+  outline: 1px solid #ff006d;
+}
+.form-con{
+  border-radius: 15px;
+  box-shadow: 0 0 35px #aaa;
+  padding: 20px;
+}
+input[type=file]::-webkit-file-upload-button{
+  z-index: 20;
+  border: 1px solid #ff006d;
+  background-color: #2225;
 }
