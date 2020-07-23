@@ -3,11 +3,11 @@ var app = express();
 const session = require('express-session');
 var bodyParser = require('body-parser');
 var multer  = require('multer')
+var upload = multer({ dest: 'uploads/posts' })
 var router = express.Router();
 var nodemailer = require('nodemailer');
 app.set('view engine', 'ejs')
 var MongoClient = require('mongodb').MongoClient;
-var upload = multer({ dest: './public/data/uploads/' });
 
 var urlencodedParser = bodyParser.urlencoded({ extended: true })
 var transporter = nodemailer.createTransport({
