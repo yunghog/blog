@@ -45,7 +45,7 @@ if(loggedin){
           <div class="row">
             <div class="col-md-8">
               <div class="form-con">
-                <form class="form-control2" action="/insert_post" method="post" enctype="multipart/form-datas" >
+                <form class="form-control2" action="/insert_post" method="post" enctype="multipart/form-data" >
                   <div class="row">
                     <div class="col-12">
                       <label for="heading">Heading*</label>
@@ -70,7 +70,7 @@ if(loggedin){
                       <select class="form-control2" name="topic" required>
                         <option value="0"></option>
                         <%for(i=0;i<vars.topics.length;i++){%>
-                          <option value="<%=vars.topics[i]._id%>"><%=vars.topics[i].topicName%></option>
+                          <option value="<%=vars.topics[i].topicName%>"><%=vars.topics[i].topicName%></option>
                         <%}%>
                       </select>
                     </div>
