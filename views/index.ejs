@@ -11,6 +11,7 @@
     <script type="text/javascript" src="index.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   </head>
   <body>
     <div class="content-wrap">
@@ -31,6 +32,96 @@
       </section>
       <br>
       <section>
+        <div class="container">
+          <div class="row no-gutters">
+            <div class="col-md-9">
+              <div class="blog-latest">
+                <div class="row">
+                  <%for(i=0;i<1;i++){%>
+                      <div class="col-md-6">
+                        <div class="blog-img-1" data-aos="fade-right" data-aos-delay="500">
+                          <img src="images/posts/<%=articles[i].image%>" alt="creedthoughts">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="blog-text-1">
+                          <h3><%=articles[i].heading%></h3>
+                          <div class="topic"><button class="text-small"><%=articles[i].topic%></button></div>
+                          <p><%=articles[i].body%></p>
+                          <p class="text-right author"><%=articles[i].author%> | <%=articles[i].date%></p>
+                          <!-- <p>Resources</p> -->
+                          <ul>
+                            <%for(j=1;j<articles[i].link.length;j++){%>
+                              <li><a href="<%=articles[i].link[j].address%>" target="_blank"><%=articles[i].link[j].text%></a> </li>
+                            <%}%>
+                            <hr>
+                          </ul>
+                        </div>
+                      </div>
+                  <%}%>
+                </div>
+                <br>
+                <h3>Recent Posts</h3>
+                <div class="row">
+                  <%for(k=1;k<=6&&articles[k]!=null;k++){%>
+                    <div class="col-md-4">
+                        <div class="blog-card-1" data-aos="fade-left" data-aos-delay="<%=(k*200)+100%>">
+                          <div class="row no-gutters">
+                            <div class="col-4">
+                              <div class="blog-card-1-img">
+                                <img src="images/posts/<%=articles[k].image%>" alt="">
+                                  <span><%=articles[k].topic%></span>
+                              </div>
+                            </div>
+                            <div class="col-8">
+                              <div class="blog-card-1-body">
+                                <h5><%=articles[k].heading%></h5>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  <%}%>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="side-col">
+                <div class="card-1" data-aos="fade-down">
+                  <div class="card-1-img">
+                    <img src="images/img1.jpg" alt="">
+                  </div>
+                  <div class="card-1-body">
+                    <h5>About Me</h5>
+                    <p>I just post some thoughts that comes right outta my mind</p>
+                    <a href="/about" class="btn btn2">About</a>
+                  </div>
+                </div>
+                <div class="card-1" data-aos="fade-down" data-aos-delay="300">
+                  <div class="card-1-body">
+                    <h5>My Socials</h5>
+                    <div class="social social-dark">
+                      <a href="https://www.instagram.com/samartha__/" target="_blank"><i class="fa fa-instagram"></i></a>
+                      <a href="https://api.whatsapp.com/send?phone=918904460742" target="_blank"><i class="fa fa-whatsapp"></i></a>
+                      <a href="https://github.com/yunghog" target="_blank"><i class="fa fa-github"></i></a>
+                      <a href="mailto:samarthahm@gmail.com"  target="_blank"><i class="fa fa-envelope"></i></a>
+                      <a href="https://www.linkedin.com/in/samartha-hm-7398861a1/" target="_blank"><i class="fa fa-linkedin"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+
+            </div>
+          </div>
+        </div>
+        <br>
         <div class="container">
           <div class="row">
             <div class="col">
@@ -54,50 +145,6 @@
             </div>
           </div>
         </div>
-        <br>
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <div class="blog-latest">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="blog-img-1">
-                      <img src="images/img1.jpg" alt="">
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="blog-text-1">
-                      <h3>heading</h3>
-                      <div class="topic"><button class="text-small">tags</button></div>
-                      <p>ha hahahahahahah</p>
-                      <p class="text-right">auhtor | date</p>
-                      <p>res</p>
-                      <ul>
-                        <li><a href="#link-address">link-text</a> </li>
-                        <li><a href="#link-address">link-text</a> </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6">
-              <h1 id="haha"></h1>
-              <%=subs[0].email%>
-            </div>
-          </div>
-        </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-3">
-
-            </div>
-          </div>
-        </div>
       </section>
     </div>
     <br>
@@ -108,6 +155,10 @@
  $("#header").load("components/header.html");
  $("#footer").load("components/footer.html");
   $("#home").addClass("active");})
+    </script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({once: true});
     </script>
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
