@@ -53,10 +53,12 @@ router.get('/',function(req, res){
   MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client) => {
     if (err) return console.error(err);
     const db = client.db('creedthoughts');
-    const subsCollection = db.collection('subscribers');
-    subsCollection.find().toArray()
+    const blogs = db.collection('blog');
+    var mysort={_id:-1};
+    blogs.find().sort(mysort).toArray()
     .then(results=>{
-      res.render('index.ejs',{subs:results})
+      console.log(results);
+      res.render('index.ejs',{articles:results})
     })
   });
 });
