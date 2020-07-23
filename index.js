@@ -2,12 +2,32 @@ var express = require('express');
 var app = express();
 const session = require('express-session');
 var bodyParser = require('body-parser');
-var multer  = require('multer')
-var upload = multer({ dest: 'uploads/posts' })
+var multer  = require('multer');
 var router = express.Router();
 var nodemailer = require('nodemailer');
+var dateFormat = require('dateformat');
+var now = new Date();
 app.set('view engine', 'ejs')
 var MongoClient = require('mongodb').MongoClient;
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true);
+  } else {
+    cb(new AppError('Not an image! Please upload an image.', 400), false);
+  }
+};
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './views/images/posts')
+  },
+  filename: function (req, file, cb) {
+    const ext = file.mimetype.split('/')[1];
+    const uniqueSuffix = Date.now() +'.'+  ext;
+    cb(null, file.fieldname + '-' + uniqueSuffix);
+  }
+})
+
+var upload = multer({ storage: storage, fileFilter: multerFilter})
 
 var urlencodedParser = bodyParser.urlencoded({ extended: true })
 var transporter = nodemailer.createTransport({
@@ -133,20 +153,24 @@ app.get('/admin/create_post', function(req, res) {
 	}
 });
 app.post('/insert_post',upload.single('blog_image'),(req,res)=>{
-    console.log(req.file, req.body);
+    // console.log(req.file, req.body);
+    date=dateFormat(now, "mmmm,dS");
      data = {
        heading:req.body.heading,
-       body: req.body.body
+       body: req.body.body,
+       topic: req.body.topic,
+       date: date,
+       image: req.file.filename,
+       link: req.body.link,
+       author: req.session.user.name
      };
+     console.log(data);
       MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client) => {
         if (err) return console.error(err);
         console.log('Connected to Database');
         const db = client.db('creedthoughts');
         const blogs = db.collection('blog');
-        blogs.insertOne({
-          "heading":req.body.heading,
-          "body":req.body.body
-      });
+        blogs.insertOne(data);
       });
      res.redirect('/admin/create_post');
 });
