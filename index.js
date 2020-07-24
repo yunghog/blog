@@ -176,6 +176,39 @@ app.post('/insert_post',upload.single('blog_image'),(req,res)=>{
       });
      res.redirect('/admin/create_post');
 });
+app.get('/blog',function(req, res){
+    MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client) => {
+      if (err) return console.error(err);
+      const db = client.db('creedthoughts');
+      const blogs = db.collection('blog');
+      var mysort={_id:-1};
+      var query ={};
+      if(req.query.topic!=null){
+        query={topic:req.query.topic};
+      }
+      blogs.find(query).sort(mysort).toArray()
+      .then(results=>{
+        console.log(results);
+        res.render('blog.ejs',{articles:results})
+      })
+    });
+});
+app.get('/blog/:heading',function(req, res){
+      MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client) => {
+      if (err) return console.error(err);
+      const db = client.db('creedthoughts');
+      const blogs = db.collection('blog');
+      var mysort={_id:-1};
+      var query ={heading: req.params.heading};
+      blogs.find(query).sort(mysort).toArray()
+      .then(results=>{
+        var recent_topic = results[0].topic;
+        blogs.find({topic:recent_topic,heading: {$ne: req.params.heading}}).sort(mysort).toArray().then(recents=>{
+          res.render('blog-single.ejs',{articles:results, recents:recents});
+        })
+      });
+    });
+});
 app.post('/logout',function(req,res){
   req.session.loggedin=false;
   res.redirect('/login');
