@@ -1,7 +1,7 @@
 <header  id="my_header">
   <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
     <div class="container">
-      <a class="navbar-brand" href="/"><img src="images/logo.png" alt="" width="60px"></a>
+      <a class="navbar-brand" href="/"><img src="/images/logo.png" alt="" width="60px"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -10,6 +10,9 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item" id="home">
             <a class="nav-link" href="/">Home </a>
+          </li>
+          <li class="nav-item" id="blog">
+            <a class="nav-link" href="/blog">Blog</a>
           </li>
           <li class="nav-item" id="about">
             <a class="nav-link" href="/about">About </a>
@@ -34,9 +37,14 @@
   </nav>
 </header>
 <script type="text/javascript">
+  // alert(this.location.pathname);
   $(document).ready(function(){
     $('a[href="' + this.location.pathname + '"]').parents('li,ul').addClass('active');
   })
+  // alert(this.location.pathname.split('/')[1]);
+  if("blog" == this.location.pathname.split('/')[1]){
+    $('a[href="/blog"]').parents('li,ul').addClass('active');
+  }
 </script>
 <script type="text/javascript">
 window.onscroll = function() {myFunction()};
