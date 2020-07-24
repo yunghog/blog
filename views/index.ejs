@@ -24,7 +24,7 @@
               <div class="canvas">
                 <p>hello! welcome to</p>
                 <h1>Creed thoughts</h1>
-                <h5>tech, cars, coding, gaming ...</h5>
+                <h5>Thats what Creed said</h5>
               </div>
             </div>
           </div>
@@ -44,7 +44,7 @@
                         </div>
                       </div>
                       <div class="col-md-6">
-                        <div class="blog-text-1">
+                        <div class="blog-text-1" data-aos="fade-in">
                           <h3><%=articles[i].heading%></h3>
                           <div class="topic"><button class="text-small"><%=articles[i].topic%></button></div>
                           <p><%=articles[i].body%></p>
@@ -56,6 +56,7 @@
                             <%}%>
                             <hr>
                           </ul>
+                          <a href="/blog/<%=articles[i].heading%>"><button class="btn btn2">more</button> </a>
                         </div>
                       </div>
                   <%}%>
@@ -65,22 +66,23 @@
                 <div class="row">
                   <%for(k=1;k<=6&&articles[k]!=null;k++){%>
                     <div class="col-md-4">
-                        <div class="blog-card-1" data-aos="fade-left" data-aos-delay="<%=(k*200)+100%>">
-                          <div class="row no-gutters">
-                            <div class="col-4">
-                              <div class="blog-card-1-img">
-                                <img src="images/posts/<%=articles[k].image%>" alt="">
-                                  <span><%=articles[k].topic%></span>
+                        <a href="/blog/<%=articles[k].heading%>">
+                          <div class="blog-card-1" data-aos="fade-left" data-aos-delay="<%=(k*200)+100%>">
+                            <div class="row no-gutters">
+                              <div class="col-4">
+                                <div class="blog-card-1-img">
+                                  <img src="images/posts/<%=articles[k].image%>" alt="">
+                                    <span><%=articles[k].topic%></span>
+                                </div>
                               </div>
-                            </div>
-                            <div class="col-8">
-                              <div class="blog-card-1-body">
-                                <h5><%=articles[k].heading%></h5>
-
+                              <div class="col-8">
+                                <div class="blog-card-1-body">
+                                  <h5><%=articles[k].heading%></h5>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </a>
                     </div>
                   <%}%>
                 </div>
@@ -133,12 +135,12 @@
               <div class="topic">
                 <div class="row">
                   <div class="col-12">
-                    <a href="#"><button>all</button></a>
-                    <a href="#"><button>tech</button></a>
-                    <a href="#"><button>gaming</button></a>
-                    <a href="#"><button>cars</button></a>
-                    <a href="#"><button>coding</button></a>
-                    <a href="#"><button>music</button></a>
+                    <a href="/blog"><button>all</button></a>
+                    <a href="/blog?topic=tech"><button>tech</button></a>
+                    <a href="/blog?topic=gaming"><button>gaming</button></a>
+                    <a href="/blog?topic=cars"><button>cars</button></a>
+                    <a href="/blog?topic=coding"><button>coding</button></a>
+                    <a href="/blog?topic=music"><button>music</button></a>
                   </div>
                 </div>
               </div>
