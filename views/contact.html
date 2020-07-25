@@ -42,17 +42,26 @@
               <form class="form-control2" action="/sendMail" method="post">
                 <div class="row">
                   <div class="col-12">
-                    <input type="text" name="name" value="" placeholder="name" required>
+                    <label>Name :</label>
+                    <input type="text" name="name" value="" required>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-12">
-                    <input type="email" name="email" value="" placeholder="email id" required>
+                    <label>Email Id :</label>
+                    <input type="email" name="email" value="" required>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-12">
-                    <textarea name="query" rows="8" cols="80" placeholder="query"></textarea>
+                    <label>Subject :</label>
+                    <input type="text" name="subject" value="" required>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <label>Query :</label>
+                    <textarea name="query" rows="8" cols="80" required></textarea>
                   </div>
                 </div>
                 <div class="row">
@@ -83,6 +92,20 @@
  $(function(){
  $("#header").load("components/header.html");
  $("#footer").load("components/footer.html");});
+   </script>
+   <script type="text/javascript">
+    $('input').on('focusin', function() {
+    $(this).parent().find('label').addClass('active-label');});
+    $('input').on('focusout', function() {
+     if (!this.value) {
+     $(this).parent().find('label').removeClass('active-label');}});
+   </script>
+   <script type="text/javascript">
+    $('textarea').on('focusin', function() {
+    $(this).parent().find('label').addClass('active-label');});
+    $('textarea').on('focusout', function() {
+     if (!this.value) {
+     $(this).parent().find('label').removeClass('active-label');}});
    </script>
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
