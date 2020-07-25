@@ -34,7 +34,7 @@
           <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
-              <div class="blog-content">
+              <div class="blog-content" data-aos="fade-down">
                 <div class="blog-img">
                   <img src="/images/posts/<%=articles[0].image%>" alt="">
                 </div>
@@ -46,7 +46,7 @@
         <div class="row">
           <div class="col-md-2"></div>
           <div class="col-md-8">
-            <div class="blog-body">
+            <div class="blog-body" data-aos="fade-right">
               <h2><%=articles[0].heading%></h3>
               <p><%=articles[0].body%></p>
               <p class="author text-right"><%=articles[0].author%> | <%=articles[0].date%></p>
@@ -93,7 +93,7 @@
         <div class="container">
           <h3>Related articles</h3>
           <div class="row">
-            <%for(i=0;i<=4&&recents[i]!=null;i++){%>
+            <%for(i=0;i<3&&recents[i]!=null;i++){%>
               <div class="col-md-4">
                   <a href="/blog/<%=recents[i].heading%>">
                     <div class="blog-card-1" data-aos="fade-left" data-aos-delay="<%=(i*100)+100%>">
