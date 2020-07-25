@@ -176,6 +176,27 @@ app.post('/insert_post',upload.single('blog_image'),(req,res)=>{
       });
      res.redirect('/admin/create_post');
 });
+app.get('/admin/view_posts', function(req, res) {
+	if (req.session.loggedin) {
+    MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client)=>{
+      if(err) return console.error(err);
+      const db = client.db('creedthoughts');
+      const blogs = db.collection('blog');
+      blogs.find().toArray(function(err, blogs_result) {
+      if (err) throw err;
+        db.collection('topic').find().toArray(function(err, topic_result){
+          vars_json={
+            blog: blogs_result,
+            topic: topic_result
+          };
+          res.render('view_posts.ejs', {loggedin: true, user: req.session.user, vars:vars_json});
+        })
+    });
+    })
+	} else {
+    res.render('view_posts.ejs', {loggedin: false});
+	}
+});
 app.get('/blog',function(req, res){
     MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client) => {
       if (err) return console.error(err);
@@ -189,7 +210,7 @@ app.get('/blog',function(req, res){
       blogs.find(query).sort(mysort).toArray()
       .then(results=>{
         console.log(results);
-        res.render('blog.ejs',{articles:results})
+        res.render('blog.ejs',{articles:results, query: req.query})
       })
     });
 });
@@ -212,6 +233,26 @@ app.get('/blog/:heading',function(req, res){
 app.post('/logout',function(req,res){
   req.session.loggedin=false;
   res.redirect('/login');
+});
+app.post('/sendMail', urlencodedParser, function(req,res){
+     response = {name:req.body.name,
+                 email:req.body.email,
+                 subject:req.body.subject,
+                 email_body:req.body.query};
+     var mail = "Hello Samartha you have a mail from " + response.name +" (" + response.email + ") regarding Creed Thoughts\n\nSubject : "+response.subject+"\nQuery : "+response.email_body+"\n\nHave a good day" ;
+     mailOptions={
+       from: 'Creed Thoughts',
+       to: 'samarthahm@gmail.com',
+       subject: 'Query from Creed Thoughts',
+       text: mail};
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
+     res.redirect('/contact');
 });
 app.listen(3030, function () {
 console.log('Example app listening on port 3030!');
