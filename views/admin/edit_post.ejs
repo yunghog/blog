@@ -1,0 +1,195 @@
+<%
+if(loggedin){
+  // console.log(username);
+  %>
+  <!DOCTYPE html>
+  <html lang="en" dir="ltr">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>Creed Thoughts | Admin</title>
+      <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
+      <link rel="stylesheet" href="../css/bootstrap.min.css">
+      <link rel="stylesheet" href="../css/style.css">
+      <link rel="icon" href="../images/logo.png" width="64px">
+      <script type="text/javascript" src="../../index.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+      <div class="content-wrap">
+        <div id="header"></div>
+        <section>
+          <div class="container-fluid" style="padding:0px">
+            <div class="row no-gutters">
+              <div class="col-12 ">
+                <div class="overlay" style="background-image: url('../images/hero1.png')"></div>
+                <div class="canvas">
+                  <!-- <p>Logged in as</p> -->
+                  <h1>Create Post</h1>
+                  <h5>Logged in as @<%=user.username%></h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <br>
+        <section>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <h3>Create Post</h3>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-con">
+                <form class="form-control2" action="/update_post" method="post" enctype="multipart/form-data" >
+                  <div class="row">
+                    <div class="col-12">
+                      <label for="heading">Heading*</label>
+                      <input id="heading" type="text" name="heading" value="" required>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <label>Body*</label>
+                      <textarea type="text" name="body" value="" rows="4" cols="80" required></textarea>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <label class="">Image</label>
+                      <input type="file" name="blog_image" value="">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <label>Select Topic*</label>
+                      <select class="form-control2" name="topic" required>
+                        <option value="0"></option>
+                        <%for(i=0;i<vars.topics.length;i++){%>
+                          <option value="<%=vars.topics[i].topicName%>"><%=vars.topics[i].topicName%></option>
+                        <%}%>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-3">
+                      <label>Resources : </label>
+                    </div>
+                    <div class="col-2">
+                      <input id="num" type="number" name="numres" value="1" required onchange="add_fields()">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12" id="res-con">
+                      <div class="row">
+                        <div class="col-6">
+                          <label>Text-1</label>
+                          <input type="text" name="link[1][text]">
+                        </div>
+                        <div class="col-6">
+                          <label>Address-1</label>
+                          <input type="text" name="link[1][address]">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 text-center">
+                      <button type="submit" name="post" class="btn btn2" >Post</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        </section>
+      </div>
+      <br>
+      <footer id="footer" class="footer-admin"></footer>
+  <script type="text/javascript">
+   $(document).ready(function(){
+   $("#header").load("components/header.html");
+   $("#footer").load("components/footer.html");})
+  </script>
+  <script type="text/javascript">
+   $('input').on('focusin', function() {
+   $(this).parent().find('label').addClass('active-label');});
+   $('input').on('focusout', function() {
+    if (!this.value) {
+    $(this).parent().find('label').removeClass('active-label');}});
+  </script>
+  <script type="text/javascript">
+   $('textarea').on('focusin', function() {
+   $(this).parent().find('label').addClass('active-label');});
+   $('textarea').on('focusout', function() {
+    if (!this.value) {
+    $(this).parent().find('label').removeClass('active-label');}});
+  </script>
+  <script type="text/javascript">
+   $('select').on('focusin', function() {
+   $(this).parent().find('label').addClass('active-label');});
+   $('select').on('focusout', function() {
+    if (!this.value) {
+    $(this).parent().find('label').removeClass('active-label');}});
+  </script>
+  <script type="text/javascript">
+    function add_fields(){
+      var num = document.getElementById('num').value;
+      var con = document.getElementById('res-con');
+      con.innerHTML="";
+      for(i=1;i<=num;i++){
+        var j=1;
+        var row = document.createElement('div');
+        row.classList.add("row");
+        row.id="row"+i;
+        var col1 = document.createElement('div');
+        col1.classList.add("col-6");
+        // col1.id="col"+i+'_'+j;
+        j++;
+        var col2 = document.createElement('div');
+        col2.classList.add("col-6");
+        // col2.id="col"+i+'_'+j;
+        var input1=document.createElement("input");
+        input1.type="text";
+        input1.name="link["+i+"][text]";
+        var input2=document.createElement("input");
+        input2.type="text";
+        input2.name="link["+i+"][address]";
+        var label1=document.createElement("label");
+        label1.innerHTML="Text- "+i;
+        var label2=document.createElement("label");
+        label2.innerHTML="Address- "+i;
+        con.append(row);
+        row.append(col1);
+        row.append(col2);
+        col1.append(label1);
+        col1.append(input1);
+        col2.append(label2);
+        col2.append(input2);
+        $('input').on('focusin', function() {
+        $(this).parent().find('label').addClass('active-label');});
+        $('input').on('focusout', function() {
+         if (!this.value) {
+         $(this).parent().find('label').removeClass('active-label');}});
+      }
+    }
+  </script>
+      <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    </body>
+  </html>
+  <%
+}
+else{%>
+  <script type="text/javascript">
+    alert('Please Login to continue');
+    window.location='/login';
+  </script>
+<%}
+%>
