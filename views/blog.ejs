@@ -33,11 +33,16 @@
       <br>
       <section>
         <div class="container">
+          <h2>Browse Post
+            <%if(query.topic!=null){
+              %> releated to <%=query.topic%><%
+            }%>
+          </h2>
           <div class="row">
             <%for(i=0;i<articles.length&&articles[i]!=null;i++){%>
               <div class="col-md-4">
                   <a href="/blog/<%=articles[i].heading%>">
-                    <div class="blog-card-1" data-aos="fade-left" data-aos-delay="<%=(i*100)+100%>">
+                    <div class="blog-card-1" data-aos="fade-left" data-aos-delay="<%=((i*100)+100)%300%>">
                       <div class="row no-gutters">
                         <div class="col-4">
                           <div class="blog-card-1-img">
