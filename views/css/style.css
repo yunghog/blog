@@ -485,3 +485,61 @@ a:hover{
   color: #ff006d;
   background-color: #222;
 }
+.blog-card-2{
+  margin:10px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #5555;
+  overflow: hidden;
+}
+.blog-card-2:hover{
+  box-shadow: 0 0 20px #f065;
+}
+.blog-card-2-img{
+  border-radius: 10px;
+  width:100%;
+  overflow: hidden;
+  padding-bottom: 10px;
+  max-height: 200px;
+}
+.blog-card-2-img img{
+  width:100%;
+}
+.blog-card-2-body{
+  padding: 10px;
+}
+.blog-card-2-img span{
+  padding: 1px;
+  background-color: #222;
+  bottom: 0px;
+  right: 0px;
+  position: absolute;
+  font-size: 12px;
+  color: #fff;
+}
+.card-footer-2{
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  bottom: 10px;
+}
+.option-con{
+  right: 10px;
+  position: absolute;
+  display: flex;
+  top: 10px;
+}
+.btn-opt{
+  font-size: 22px;
+  background-color: #0000 !important;
+  color: #fff!important;
+}
+.option-grp{
+  background-color: #eee;
+  position: absolute;
+  display: block;
+  right: 40px;
+  top: -15px;
+  opacity: 0;
+  visibility: hidden;
+  transition: 1s ease;
+}
