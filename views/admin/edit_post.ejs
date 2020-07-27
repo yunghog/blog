@@ -26,7 +26,7 @@ if(loggedin){
                 <div class="overlay" style="background-image: url('../images/hero1.png')"></div>
                 <div class="canvas">
                   <!-- <p>Logged in as</p> -->
-                  <h1>Create Post</h1>
+                  <h1>Edit Post</h1>
                   <h5>Logged in as @<%=user.username%></h5>
                 </div>
               </div>
@@ -38,7 +38,7 @@ if(loggedin){
         <div class="container">
           <div class="row">
             <div class="col-md-12">
-              <h3>Create Post</h3>
+              <h3>Edit Post</h3>
             </div>
           </div>
           <br>
@@ -49,18 +49,19 @@ if(loggedin){
                   <div class="row">
                     <div class="col-12">
                       <label for="heading">Heading*</label>
-                      <input id="heading" type="text" name="heading" value="" required>
+                      <input id="heading" type="text" name="heading" value="<%=vars.blog_post[0].heading%>" required>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-12">
                       <label>Body*</label>
-                      <textarea type="text" name="body" value="" rows="4" cols="80" required></textarea>
+                      <textarea type="text" name="body" value="<%=vars.blog_post[0].body%>" rows="4" cols="80" required><%=vars.blog_post[0].body%></textarea>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-12">
                       <label class="">Image</label>
+                      <input type="hidden" name="prev_image" value="<%=vars.blog_post[0].image%>">
                       <input type="file" name="blog_image" value="">
                     </div>
                   </div>
@@ -68,7 +69,7 @@ if(loggedin){
                     <div class="col-12">
                       <label>Select Topic*</label>
                       <select class="form-control2" name="topic" required>
-                        <option value="0"></option>
+                        <option value="<%=vars.blog_post[0].topic%>"><%=vars.blog_post[0].topic%></option>
                         <%for(i=0;i<vars.topics.length;i++){%>
                           <option value="<%=vars.topics[i].topicName%>"><%=vars.topics[i].topicName%></option>
                         <%}%>
@@ -80,21 +81,23 @@ if(loggedin){
                       <label>Resources : </label>
                     </div>
                     <div class="col-2">
-                      <input id="num" type="number" name="numres" value="1" required onchange="add_fields()">
+                      <input id="num" type="number" name="numres" value="<%=vars.blog_post[0].link.length%>" required onchange="add_fields()">
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-12" id="res-con">
+                      <%for(j=1;j<vars.blog_post[0].topic.length;j++){%>
                       <div class="row">
                         <div class="col-6">
-                          <label>Text-1</label>
-                          <input type="text" name="link[1][text]">
+                          <label>Text-<%=j%></label>
+                          <input type="text" name="link[<%=j%>][text]" value="<%=vars.blog_post[0].link[1].text%>">
                         </div>
                         <div class="col-6">
-                          <label>Address-1</label>
-                          <input type="text" name="link[1][address]">
+                          <label>Address-<%=j%></label>
+                          <input type="text" name="link[<%=j%>][address]" value="<%=vars.blog_post[0].link[1].address%>">
                         </div>
                       </div>
+                      <%}%>
                     </div>
                   </div>
                   <div class="row">
