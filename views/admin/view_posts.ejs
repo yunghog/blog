@@ -53,11 +53,11 @@ if(loggedin){
                             <div class="option-con">
                               <button class="btn btn-opt" id="btnOpt" onclick="toggle_option_grp(<%=j%>)" ><i class="fa fa-ellipsis-v"></i></button>
                               <div class="option-grp" id="optionGrp_<%=j%>">
-                                <form class="" action="admin/edit_post" method="post">
+                                <form class="" action="/admin/edit_post" method="post">
                                   <input type="hidden" name="edit_heading" value="<%=vars.blog[j].heading%>">
                                   <button class="btn btn1" type="submit"><i class="fa fa-pencil"></i></button>
                                 </form>
-                                <form class="" action="admin/delete_post" method="post">
+                                <form class="" action="/admin/delete_post" method="post">
                                   <input type="hidden" name="edit_heading" value="<%=vars.blog[j].heading%>">
                                   <button class="btn btn1" type="submit"><i class="fa fa-trash"></i></button>
                                 </form>
@@ -70,15 +70,7 @@ if(loggedin){
                         <div class="row no-gutters">
                         <div class="col-12">
                           <div class="blog-card-2-body">
-
                             <h5><%=vars.blog[j].heading%></h5>
-                            <!-- <div class="card-footer-2">
-                              <form class="" action="admin/edit_post" method="post">
-                                <input type="hidden" name="edit_heading" value="<%=vars.blog[j].heading%>">
-                                <button class="btn btn1" type="submit">edit</button>
-                              </form>
-                              <button class="btn btn1">delete</button>
-                            </div> -->
                           </div>
                         </div>
                       </div>
