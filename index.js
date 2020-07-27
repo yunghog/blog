@@ -254,6 +254,29 @@ app.post('/sendMail', urlencodedParser, function(req,res){
       });
      res.redirect('/contact');
 });
+app.post('/admin/edit_post',urlencodedParser, function(req, res) {
+	if (req.session.loggedin) {
+    MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client)=>{
+      if(err) return console.error(err);
+      const db = client.db('creedthoughts');
+      const topic = db.collection('topic');
+      topic.find().toArray(function(err, topic_result) {
+      if (err) throw err;
+      const blogs = db.collection('blog');
+      var query = {heading: req.body.edit_heading};
+      blogs.find(query).toArray(function(err, blog_result){
+        vars_json={
+          topics: topic_result,
+          blog_post: blog_result
+        };
+        res.render('edit_post.ejs', {loggedin: true, user: req.session.user, vars:vars_json});
+      })
+    });
+    })
+	} else {
+    res.render('edit_post.ejs', {loggedin: false});
+	}
+});
 app.listen(3030, function () {
 console.log('Example app listening on port 3030!');
 });
