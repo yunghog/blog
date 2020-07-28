@@ -53,9 +53,9 @@ router.get('/',function(req, res){
   MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client) => {
     if (err) return console.error(err);
     const db = client.db('creedthoughts');
-    const blogs = db.collection('blog');
+    const blogs = db.collection('blogs');
     var mysort={_id:-1};
-    blogs.find().sort(mysort).toArray()
+    blogs.find({active: 1}).sort(mysort).toArray()
     .then(results=>{
       console.log(results);
       res.render('index.ejs',{articles:results})
@@ -94,10 +94,7 @@ app.post('/mailingList', urlencodedParser,(req, res) => {
       console.log('Connected to Database');
       const db = client.db('creedthoughts');
       const subsCollection = db.collection('subscribers');
-      subsCollection.count({},(err,n)=>{
-        n=n+1;
-        subsCollection.insert({"_id":n ,"email":req.body.email});
-      });
+      subsCollection.insert({"email":req.body.email});
     });
    res.redirect('/subscription');
 });
@@ -141,7 +138,7 @@ app.get('/admin/create_post', function(req, res) {
     MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client)=>{
       if(err) return console.error(err);
       const db = client.db('creedthoughts');
-      const topic = db.collection('topic');
+      const topic = db.collection('topics');
       topic.find().toArray(function(err, topic_result) {
       if (err) throw err;
         vars_json={
@@ -164,14 +161,16 @@ app.post('/insert_post',upload.single('blog_image'),(req,res)=>{
        date: date,
        image: req.file.filename,
        link: req.body.link,
-       author: req.session.user.name
+       author: req.session.user.name,
+       active: 1,
+       video: req.body.video
      };
      console.log(data);
       MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client) => {
         if (err) return console.error(err);
         console.log('Connected to Database');
         const db = client.db('creedthoughts');
-        const blogs = db.collection('blog');
+        const blogs = db.collection('blogs');
         blogs.insertOne(data);
       });
      res.redirect('/admin/create_post');
@@ -181,14 +180,15 @@ app.get('/admin/view_posts', function(req, res) {
     MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client)=>{
       if(err) return console.error(err);
       const db = client.db('creedthoughts');
-      const blogs = db.collection('blog');
-      blogs.find().toArray(function(err, blogs_result) {
+      const blogs = db.collection('blogs');
+      blogs.find({active:1}).toArray(function(err, blogs_result) {
       if (err) throw err;
-        db.collection('topic').find().toArray(function(err, topic_result){
+        db.collection('topics').find().toArray(function(err, topic_result){
           vars_json={
             blog: blogs_result,
             topic: topic_result
           };
+          console.log(vars_json);
           res.render('view_posts.ejs', {loggedin: true, user: req.session.user, vars:vars_json});
         })
     });
@@ -201,11 +201,12 @@ app.get('/blog',function(req, res){
     MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client) => {
       if (err) return console.error(err);
       const db = client.db('creedthoughts');
-      const blogs = db.collection('blog');
+      const blogs = db.collection('blogs');
       var mysort={_id:-1};
-      var query ={};
+      var query ={active: 1};
       if(req.query.topic!=null){
-        query={topic:req.query.topic};
+        query={topic:req.query.topic,
+        active: 1};
       }
       blogs.find(query).sort(mysort).toArray()
       .then(results=>{
@@ -218,7 +219,7 @@ app.get('/blog/:heading',function(req, res){
       MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client) => {
       if (err) return console.error(err);
       const db = client.db('creedthoughts');
-      const blogs = db.collection('blog');
+      const blogs = db.collection('blogs');
       var mysort={_id:-1};
       var query ={heading: req.params.heading};
       blogs.find(query).sort(mysort).toArray()
@@ -259,10 +260,10 @@ app.post('/admin/edit_post',urlencodedParser, function(req, res) {
     MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client)=>{
       if(err) return console.error(err);
       const db = client.db('creedthoughts');
-      const topic = db.collection('topic');
+      const topic = db.collection('topics');
       topic.find().toArray(function(err, topic_result) {
       if (err) throw err;
-      const blogs = db.collection('blog');
+      const blogs = db.collection('blogs');
       var query = {heading: req.body.edit_heading};
       blogs.find(query).toArray(function(err, blog_result){
         vars_json={
@@ -320,10 +321,29 @@ app.post('/update_post',upload.single('edit_blog_image'), function(req, res) {
     MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client)=>{
       if(err) return console.error(err);
       const db = client.db('creedthoughts');
-      const blogs = db.collection('blog');
+      const blogs = db.collection('blogs');
       blogs.updateOne(query, new_values, function(err,res){
         if (err) throw err;
         console.log("1 document updated");
+      });
+    });
+    res.redirect('/admin/view_posts');
+  }
+});
+app.post('/delete_post', urlencodedParser, function(req, res) {
+	if (req.session.loggedin) {
+    var query = {heading: req.body.delete_heading};
+      var new_values = {$set:{
+        active: 0
+      }};
+    console.log(new_values);
+    MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client)=>{
+      if(err) return console.error(err);
+      const db = client.db('creedthoughts');
+      const blogs = db.collection('blogs');
+      blogs.updateOne(query, new_values, function(err,res){
+        if (err) throw err;
+        console.log("1 document deleted");
       });
     });
     res.redirect('/admin/view_posts');
