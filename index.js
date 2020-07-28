@@ -277,6 +277,58 @@ app.post('/admin/edit_post',urlencodedParser, function(req, res) {
     res.render('edit_post.ejs', {loggedin: false});
 	}
 });
+app.post('/update_post',upload.single('edit_blog_image'), function(req, res) {
+	if (req.session.loggedin) {
+    var query = {heading: req.body.edit_heading};
+    if(req.file){
+      if(req.body.link){
+      var new_values = {$set:{
+        heading: req.body.edit_heading,
+        body: req.body.edit_body,
+        topic: req.body.edit_topic,
+        image: req.file.filename,
+        link: req.body.link
+      }};
+    }
+    else{
+      var new_values = {$set:{
+        heading: req.body.edit_heading,
+        body: req.body.edit_body,
+        topic: req.body.edit_topic,
+        image: req.file.filename,
+      }};
+    }
+    }
+    else{
+        if(req.body.link){
+        var new_values = {$set:{
+          heading: req.body.edit_heading,
+          body: req.body.edit_body,
+          topic: req.body.edit_topic,
+          link: req.body.link
+        }};
+      }
+      else{
+        var new_values = {$set:{
+          heading: req.body.edit_heading,
+          body: req.body.edit_body,
+          topic: req.body.edit_topic,
+        }};
+      }
+    }
+    console.log(new_values);
+    MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client)=>{
+      if(err) return console.error(err);
+      const db = client.db('creedthoughts');
+      const blogs = db.collection('blog');
+      blogs.updateOne(query, new_values, function(err,res){
+        if (err) throw err;
+        console.log("1 document updated");
+      });
+    });
+    res.redirect('/admin/view_posts');
+  }
+});
 app.listen(3030, function () {
 console.log('Example app listening on port 3030!');
 });
