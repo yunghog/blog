@@ -51,16 +51,29 @@
                           <p class="text-right author"><%=articles[i].author%> | <%=articles[i].date%></p>
                           <!-- <p>Resources</p> -->
                           <ul>
-                            <%for(j=1;j<articles[i].link.length;j++){%>
+                            <%if(articles[i].link){
+                            for(j=1;j<articles[i].link.length;j++){%>
                               <li><a href="<%=articles[i].link[j].address%>" target="_blank"><%=articles[i].link[j].text%></a> </li>
-                            <%}%>
+                            <%}}%>
                             <hr>
                           </ul>
                           <a href="/blog/<%=articles[i].heading%>"><button class="btn btn2">more</button> </a>
                         </div>
+                        <br>
                       </div>
-                  <%}%>
                 </div>
+                <br>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="blog-video-1" data-aos="fade-left" data-aos-delay="1000">
+                     <%if(articles[i].video){
+                       %>
+                       <iframe width="100%" height="400rem" src="https://www.youtube.com/embed/<%=articles[i].video.split('/').pop()%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                     <%}%>
+                    </div>
+                  </div>
+                </div>
+                <%}%>
                 <br>
                 <h3>Recent Posts</h3>
                 <div class="row">
