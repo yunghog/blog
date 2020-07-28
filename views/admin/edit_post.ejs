@@ -48,27 +48,27 @@ if(loggedin){
                 <form class="form-control2" action="/update_post" method="post" enctype="multipart/form-data" >
                   <div class="row">
                     <div class="col-12">
-                      <label for="heading">Heading*</label>
-                      <input id="heading" type="text" name="heading" value="<%=vars.blog_post[0].heading%>" required>
+                      <label class="active-label">Heading*</label>
+                      <input id="heading" type="text" name="edit_heading" value="<%=vars.blog_post[0].heading%>" required>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-12">
-                      <label>Body*</label>
-                      <textarea type="text" name="body" value="<%=vars.blog_post[0].body%>" rows="4" cols="80" required><%=vars.blog_post[0].body%></textarea>
+                      <label class="active-label">Body*</label>
+                      <textarea type="text" name="edit_body" value="<%=vars.blog_post[0].body%>" rows="4" cols="80" required><%=vars.blog_post[0].body%></textarea>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-12">
-                      <label class="">Image</label>
+                      <label class="active-label">Image</label>
                       <input type="hidden" name="prev_image" value="<%=vars.blog_post[0].image%>">
-                      <input type="file" name="blog_image" value="">
+                      <input type="file" name="edit_blog_image" value="">
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-12">
-                      <label>Select Topic*</label>
-                      <select class="form-control2" name="topic" required>
+                      <label class="active-label">Select Topic*</label>
+                      <select class="form-control2" name="edit_topic" required>
                         <option value="<%=vars.blog_post[0].topic%>"><%=vars.blog_post[0].topic%></option>
                         <%for(i=0;i<vars.topics.length;i++){%>
                           <option value="<%=vars.topics[i].topicName%>"><%=vars.topics[i].topicName%></option>
@@ -78,31 +78,29 @@ if(loggedin){
                   </div>
                   <div class="row">
                     <div class="col-3">
-                      <label>Resources : </label>
+                      <label >Resources : </label>
                     </div>
                     <div class="col-2">
-                      <input id="num" type="number" name="numres" value="<%=vars.blog_post[0].link.length%>" required onchange="add_fields()">
+                      <input id="num" type="number" name="numres" value="1" required onchange="add_fields()">
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-12" id="res-con">
-                      <%for(j=1;j<vars.blog_post[0].topic.length;j++){%>
                       <div class="row">
                         <div class="col-6">
-                          <label>Text-<%=j%></label>
-                          <input type="text" name="link[<%=j%>][text]" value="<%=vars.blog_post[0].link[1].text%>">
+                          <label class="active-label">Text-0</label>
+                          <input type="text" name="link[0][text]">
                         </div>
                         <div class="col-6">
-                          <label>Address-<%=j%></label>
-                          <input type="text" name="link[<%=j%>][address]" value="<%=vars.blog_post[0].link[1].address%>">
+                          <label class="active-label">Address-0</label>
+                          <input type="text" name="link[0][address]">
                         </div>
                       </div>
-                      <%}%>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-12 text-center">
-                      <button type="submit" name="post" class="btn btn2" >Post</button>
+                      <button type="submit" name="update" class="btn btn2" >Update</button>
                     </div>
                   </div>
                 </form>
@@ -115,37 +113,11 @@ if(loggedin){
       <br>
       <footer id="footer" class="footer-admin"></footer>
   <script type="text/javascript">
-   $(document).ready(function(){
-   $("#header").load("components/header.html");
-   $("#footer").load("components/footer.html");})
-  </script>
-  <script type="text/javascript">
-   $('input').on('focusin', function() {
-   $(this).parent().find('label').addClass('active-label');});
-   $('input').on('focusout', function() {
-    if (!this.value) {
-    $(this).parent().find('label').removeClass('active-label');}});
-  </script>
-  <script type="text/javascript">
-   $('textarea').on('focusin', function() {
-   $(this).parent().find('label').addClass('active-label');});
-   $('textarea').on('focusout', function() {
-    if (!this.value) {
-    $(this).parent().find('label').removeClass('active-label');}});
-  </script>
-  <script type="text/javascript">
-   $('select').on('focusin', function() {
-   $(this).parent().find('label').addClass('active-label');});
-   $('select').on('focusout', function() {
-    if (!this.value) {
-    $(this).parent().find('label').removeClass('active-label');}});
-  </script>
-  <script type="text/javascript">
     function add_fields(){
       var num = document.getElementById('num').value;
       var con = document.getElementById('res-con');
       con.innerHTML="";
-      for(i=1;i<=num;i++){
+      for(i=0;i<num;i++){
         var j=1;
         var row = document.createElement('div');
         row.classList.add("row");
