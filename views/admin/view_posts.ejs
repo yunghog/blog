@@ -42,7 +42,7 @@ if(loggedin){
           <div class="col-md-12">
           <h3><%=vars.topic[i].topicName%></h3>
           <div class="row">
-            <%for(j=0;i<vars.blog.length&&vars.blog[j]!=null;j++){
+            <%for(j=0;j<vars.blog.length&&vars.blog[j]!=null;j++){
               if(vars.topic[i].topicName==vars.blog[j].topic){
               %>
               <div class="col-md-3">
@@ -57,8 +57,8 @@ if(loggedin){
                                   <input type="hidden" name="edit_heading" value="<%=vars.blog[j].heading%>">
                                   <button class="btn btn1" type="submit"><i class="fa fa-pencil"></i></button>
                                 </form>
-                                <form class="" action="/admin/delete_post" method="post">
-                                  <input type="hidden" name="edit_heading" value="<%=vars.blog[j].heading%>">
+                                <form class="" action="/delete_post" method="post">
+                                  <input type="hidden" name="delete_heading" value="<%=vars.blog[j].heading%>">
                                   <button class="btn btn1" type="submit"><i class="fa fa-trash"></i></button>
                                 </form>
                               </div>
@@ -81,8 +81,6 @@ if(loggedin){
           </div>
           </div>
           <%}%>
-          </div>
-        </div>
         </section>
       </div>
       <br>
