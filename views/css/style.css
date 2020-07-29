@@ -171,6 +171,7 @@ nav{
   height: 30px;
 }
 .social a{
+  transition: 1s ease;
   color: #fff;
   font-size: 26px;
   padding: 5px 10px 5px 10px;
@@ -188,10 +189,10 @@ nav{
   text-align: center;
 }
 .social-dark a{
+  transition: 1s ease;
   color: #222;
 }
 .social-dark a:hover{
-  background-color: #222;
   color: #ff006d !important;
 }
 a:hover{
