@@ -7,6 +7,8 @@ var router = express.Router();
 var nodemailer = require('nodemailer');
 var dateFormat = require('dateformat');
 var now = new Date();
+var dbURL = "mongodb+srv://Samartha:creedSam99@yungh@creedthoughtsdb.pam7q.mongodb.net/test";
+// var dbURL = "mongodb://127.0.0.1:27017";
 app.set('view engine', 'ejs')
 var MongoClient = require('mongodb').MongoClient;
 const multerFilter = (req, file, cb) => {
@@ -50,7 +52,7 @@ app.use(session({
   saveUninitialized: true
 }));
 router.get('/',function(req, res){
-  MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client) => {
+  MongoClient.connect(dbURL, {useUnifiedTopology: true}, (err, client) => {
     if (err) return console.error(err);
     const db = client.db('creedthoughts');
     const blogs = db.collection('blogs');
@@ -89,7 +91,7 @@ app.post('/mailingList', urlencodedParser,(req, res) => {
         console.log('Email sent: ' + info.response);
       }
     });
-    MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client) => {
+    MongoClient.connect(dbURL, {useUnifiedTopology: true}, (err, client) => {
       if (err) return console.error(err);
       console.log('Connected to Database');
       const db = client.db('creedthoughts');
@@ -101,7 +103,7 @@ app.post('/mailingList', urlencodedParser,(req, res) => {
 app.post('/auth', urlencodedParser,(req, res)=>{
   username=req.body.username;
   password=req.body.password;
-  MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client)=>{
+  MongoClient.connect(dbURL, {useUnifiedTopology: true}, (err, client)=>{
     if(err) return console.error(err);
     const db = client.db('creedthoughts');
     const admin = db.collection('admin');
@@ -135,7 +137,7 @@ app.get('/admin', function(req, res) {
 });
 app.get('/admin/create_post', function(req, res) {
 	if (req.session.loggedin) {
-    MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client)=>{
+    MongoClient.connect(dbURL, {useUnifiedTopology: true}, (err, client)=>{
       if(err) return console.error(err);
       const db = client.db('creedthoughts');
       const topic = db.collection('topics');
@@ -166,7 +168,7 @@ app.post('/insert_post',upload.single('blog_image'),(req,res)=>{
        video: req.body.video
      };
      console.log(data);
-      MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client) => {
+      MongoClient.connect(dbURL, {useUnifiedTopology: true}, (err, client) => {
         if (err) return console.error(err);
         console.log('Connected to Database');
         const db = client.db('creedthoughts');
@@ -177,7 +179,7 @@ app.post('/insert_post',upload.single('blog_image'),(req,res)=>{
 });
 app.get('/admin/view_posts', function(req, res) {
 	if (req.session.loggedin) {
-    MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client)=>{
+    MongoClient.connect(dbURL, {useUnifiedTopology: true}, (err, client)=>{
       if(err) return console.error(err);
       const db = client.db('creedthoughts');
       const blogs = db.collection('blogs');
@@ -198,7 +200,7 @@ app.get('/admin/view_posts', function(req, res) {
 	}
 });
 app.get('/blog',function(req, res){
-    MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client) => {
+    MongoClient.connect(dbURL, {useUnifiedTopology: true}, (err, client) => {
       if (err) return console.error(err);
       const db = client.db('creedthoughts');
       const blogs = db.collection('blogs');
@@ -216,7 +218,7 @@ app.get('/blog',function(req, res){
     });
 });
 app.get('/blog/:heading',function(req, res){
-      MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client) => {
+      MongoClient.connect(dbURL, {useUnifiedTopology: true}, (err, client) => {
       if (err) return console.error(err);
       const db = client.db('creedthoughts');
       const blogs = db.collection('blogs');
@@ -257,7 +259,7 @@ app.post('/sendMail', urlencodedParser, function(req,res){
 });
 app.post('/admin/edit_post',urlencodedParser, function(req, res) {
 	if (req.session.loggedin) {
-    MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client)=>{
+    MongoClient.connect(dbURL, {useUnifiedTopology: true}, (err, client)=>{
       if(err) return console.error(err);
       const db = client.db('creedthoughts');
       const topic = db.collection('topics');
@@ -318,7 +320,7 @@ app.post('/update_post',upload.single('edit_blog_image'), function(req, res) {
       }
     }
     console.log(new_values);
-    MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client)=>{
+    MongoClient.connect(dbURL, {useUnifiedTopology: true}, (err, client)=>{
       if(err) return console.error(err);
       const db = client.db('creedthoughts');
       const blogs = db.collection('blogs');
@@ -337,7 +339,7 @@ app.post('/delete_post', urlencodedParser, function(req, res) {
         active: 0
       }};
     console.log(new_values);
-    MongoClient.connect('mongodb://127.0.0.1:27017', {useUnifiedTopology: true}, (err, client)=>{
+    MongoClient.connect(dbURL, {useUnifiedTopology: true}, (err, client)=>{
       if(err) return console.error(err);
       const db = client.db('creedthoughts');
       const blogs = db.collection('blogs');
