@@ -53,10 +53,9 @@
                   <p><%=articles[0].body%></p>
                   <p class="author text-right"><%=articles[0].author%> | <%=articles[0].date%></p>
                   <%if(articles[0].link){%>
-                  <p>Usefull links</p>
                   <ul>
-                    <%for(i=1;i<articles[0].link.length;i++){%>
-                      <li><a href="<%=articles[0].link[i].address%>"><%=articles[0].link[i].text%></a></li>
+                    <%for(i=0;i<articles[0].link.length;i++){%>
+                      <li><a href="<%=articles[0].link[i].address%>" target="_blank"><%=articles[0].link[i].text%></a></li>
                     <%}}%>
                     <hr>
                   </ul>
@@ -144,10 +143,10 @@
                 <div class="row">
                   <div class="col-12">
                     <a href="/blog"><button>all</button></a>
-                    <a href="/blog?topic=tech"><button>tech</button></a>
+                    <!-- <a href="/blog?topic=tech"><button>tech</button></a> -->
                     <a href="/blog?topic=gaming"><button>gaming</button></a>
                     <a href="/blog?topic=cars"><button>cars</button></a>
-                    <a href="/blog?topic=coding"><button>coding</button></a>
+                    <!-- <a href="/blog?topic=coding"><button>coding</button></a> -->
                     <a href="/blog?topic=music"><button>music</button></a>
                   </div>
                 </div>
