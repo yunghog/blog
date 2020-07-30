@@ -94,11 +94,11 @@ if(loggedin){
                       <div class="row">
                         <div class="col-6">
                           <label>Text-1</label>
-                          <input type="text" name="link[1][text]">
+                          <input type="text" name="link[0][text]">
                         </div>
                         <div class="col-6">
                           <label>Address-1</label>
-                          <input type="text" name="link[1][address]">
+                          <input type="text" name="link[0][address]">
                         </div>
                       </div>
                     </div>
@@ -148,7 +148,7 @@ if(loggedin){
       var num = document.getElementById('num').value;
       var con = document.getElementById('res-con');
       con.innerHTML="";
-      for(i=1;i<=num;i++){
+      for(i=0;i<num;i++){
         var j=1;
         var row = document.createElement('div');
         row.classList.add("row");
