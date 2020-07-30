@@ -31,6 +31,7 @@
   "scripts": {
   "start": "nodemon index.js",
   "predeploy": "npm run build",
+  "build": "npm build",
   "deploy": "gh-pages -b deploy -d build"
 },
 "devDependencies": {
