@@ -5,9 +5,7 @@
   "description": "my blog website. Made with node JS, Express  JS and Bootstrap 5",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_ENV=development ./node_modules/.bin/netlify-lambda serve ./",
-    "build": "NODE_ENV=production ./node_modules/.bin/netlify-lambda build ./"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
