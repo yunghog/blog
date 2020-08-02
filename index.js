@@ -44,7 +44,8 @@ var transporter = nodemailer.createTransport({
   }
 });
 var path = __dirname + '/views/';
-app.use('/',router);
+// app.use('/',router);
+app.use('/.netlify/functions/server', router);
 app.use(express.static(__dirname + '/views'));
 app.set('views', [__dirname+'/views/admin/',__dirname+'/views'])
 app.use(session({
