@@ -8,7 +8,6 @@ var nodemailer = require('nodemailer');
 var dateFormat = require('dateformat');
 var now = new Date();
 var sensitive=require('./sensitive');
-console.log(sensitive);
 var dbURL = sensitive.password.mongo;
 // var dbURL = "mongodb://127.0.0.1:27017";
 app.set('view engine', 'ejs')
