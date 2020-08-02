@@ -7,7 +7,9 @@ var router = express.Router();
 var nodemailer = require('nodemailer');
 var dateFormat = require('dateformat');
 var now = new Date();
-var dbURL = "mongodb+srv://Samartha:creedSam99@yungh@creedthoughtsdb.pam7q.mongodb.net/test";
+var sensitive=require('./sensitive');
+console.log(sensitive);
+var dbURL = sensitive.password.mongo;
 // var dbURL = "mongodb://127.0.0.1:27017";
 app.set('view engine', 'ejs')
 var MongoClient = require('mongodb').MongoClient;
@@ -38,8 +40,8 @@ var transporter = nodemailer.createTransport({
   secure: false,
   requireTLS: true,
   auth: {
-    user: 'creedthoughts66@gmail.com',
-    pass: '#yungh0gbeat5'
+    user: sensitive.mailid.gmail,
+    pass: sensitive.password.gmail
   }
 });
 var path = __dirname + '/views/';

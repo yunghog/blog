@@ -1,15 +1,16 @@
 {
-  "homepage": "https://github.com/blog",
-  "name": "blog",
+  "homepage": "https://github.com/yunghog/blog",
+  "name": "creed-thoughts",
   "version": "1.0.0",
   "description": "my blog website. Made with node JS, Express  JS and Bootstrap 5",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "blog"
+    "url": "https://github.com/yunghog/blog"
   },
   "keywords": [
     "blog"
@@ -32,5 +33,8 @@
   },
   "devDependencies": {
     "gh-pages": "^3.1.0"
+  },
+  "engines": {
+    "node": "13.x"
   }
 }
