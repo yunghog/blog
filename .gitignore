@@ -3,3 +3,4 @@ data
 views/images/posts
 uploads
 "dist/"
+sensitive.json
