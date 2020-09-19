@@ -44,7 +44,6 @@ var transporter = nodemailer.createTransport({
   }
 });
 var path = __dirname + '/views/';
-app.use('/.netlify/functions/server', router);
 app.use(express.static(__dirname + '/views'));
 app.set('views', [__dirname+'/views/admin/',__dirname+'/views'])
 app.use(session({
@@ -352,5 +351,5 @@ app.post('/delete_post', urlencodedParser, function(req, res) {
     res.redirect('/admin/view_posts');
   }
 });
-app.listen(process.env.PORT || 3030, 
+app.listen(process.env.PORT || 3030,
 	() => console.log("Server is running..."));
