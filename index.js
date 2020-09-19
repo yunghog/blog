@@ -1,6 +1,5 @@
 var express = require('express');
 var app = express();
-const serverless = require("serverless-http");
 const session = require('express-session');
 var bodyParser = require('body-parser');
 var multer  = require('multer');
@@ -356,5 +355,3 @@ app.post('/delete_post', urlencodedParser, function(req, res) {
 });
 app.listen(process.env.PORT || 3000,
 	() => console.log("Server is running..."));
-module.exports = app;
-module.exports.handler = serverless(app);
