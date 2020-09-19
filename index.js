@@ -352,6 +352,5 @@ app.post('/delete_post', urlencodedParser, function(req, res) {
     res.redirect('/admin/view_posts');
   }
 });
-app.listen(3030, function () {
-console.log('Example app listening on port 3030!');
-});
+app.listen(process.env.PORT || 3030, 
+	() => console.log("Server is running..."));
