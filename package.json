@@ -1,27 +1,15 @@
 {
-  "homepage": "http://creedthoughts.herokuapp.com/",
   "name": "creed-thoughts",
   "version": "1.0.0",
   "description": "my blog website. Made with node JS, Express  JS and Bootstrap 5",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/yunghog/blog.git"
-  },
-  "keywords": [
-    "blog"
-  ],
-  "author": "samartha",
-  "license": "ISC",
   "dependencies": {
+    "express": "^4.16.4",
+    "netlify-lambda": "^1.4.3",
+    "serverless-http": "^1.9.1",
     "body-parser": "^1.19.0",
     "dateformat": "^3.0.3",
     "ejs": "^3.1.3",
-    "express": "^4.17.1",
     "express-session": "^1.17.1",
     "expressjs": "^1.0.1",
     "mongodb": "^3.5.9",
@@ -29,15 +17,24 @@
     "nodemailer": "^6.4.10",
     "nodemon": "^2.0.4"
   },
-  "devDependencies": {
-    "gh-pages": "^3.1.0",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
+  "devDependencies": {},
+  "scripts": {
+    "start": "NODE_ENV=development ./node_modules/.bin/netlify-lambda serve src",
+    "build": "NODE_ENV=production ./node_modules/.bin/netlify-lambda build src"
   },
-  "engines": {
-    "node": "13.x"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yunghog/creed-thoughts.git"
   },
+  "keywords": [
+    "blog",
+    "creed",
+    "creed-thoughts"
+  ],
+  "author": "Samartha",
+  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/yunghog/blog/issues"
-  }
+    "url": "https://github.com/yunghog/creed-thoughts/issues"
+  },
+  "homepage": "https://github.com/yunghog/creed-thoughts"
 }

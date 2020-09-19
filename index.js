@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+const serverless = require("serverless-http");
 const session = require('express-session');
 var bodyParser = require('body-parser');
 var multer  = require('multer');
@@ -44,6 +45,8 @@ var transporter = nodemailer.createTransport({
   }
 });
 var path = __dirname + '/views/';
+// app.use('/',router);
+app.use(`/`, router);
 app.use(express.static(__dirname + '/views'));
 app.set('views', [__dirname+'/views/admin/',__dirname+'/views'])
 app.use(session({
@@ -351,5 +354,7 @@ app.post('/delete_post', urlencodedParser, function(req, res) {
     res.redirect('/admin/view_posts');
   }
 });
-app.listen(process.env.PORT || 3030,
+app.listen(process.env.PORT || 3000,
 	() => console.log("Server is running..."));
+module.exports = app;
+module.exports.handler = serverless(app);
