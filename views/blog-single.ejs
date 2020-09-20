@@ -34,9 +34,9 @@
           <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
-              <div class="blog-content" data-aos="fade-down">
-                <div class="blog-img">
-                  <img src="/images/posts/<%=articles[0].image%>" alt="">
+              <div class="blog-content" data-aos="fade-down" data-aos-once="false" data-aos-mirror="true">
+                <div class="blog-img"  >
+                  <img src="/images/posts/<%=articles[0].image%>" alt="" >
                 </div>
               </div>
             </div>
@@ -44,11 +44,15 @@
         </div>
         <div class="container-fluid">
         <div class="row">
-          <div class="col-md-2"></div>
+          <div class="col-md-2">
+            <div class="blog-img" id="sideimg">
+              <!-- <img src="/images/posts/<%=articles[0].image%>" alt=""> -->
+            </div>
+          </div>
           <div class="col-md-8">
             <div class="row">
               <div class="col-md-12">
-                <div class="blog-body" data-aos="fade-right">
+                <div class="blog-body" id="mainimg" data-aos="fade-right">
                   <h2><%=articles[0].heading%></h3>
                   <p><%=articles[0].body%></p>
                   <p class="author text-right"><%=articles[0].author%> | <%=articles[0].date%></p>
@@ -73,19 +77,19 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-1">
-                <p>Share</p>
-              </div>
-              <div class="col-md-11 text-left">
-                <div class="share-link">
+              <div class="col-11 text-left">
+                <div class="share-link btn-group">
+                  <a class="border-right border-danger">Share</a>
                   <a href="https://api.whatsapp.com/send?text=https://creedthoughts.herokuapp.com/blog/<%=articles[0].heading%>" target="_blank"><i class="fa fa-whatsapp"></i></a>
                   <a href="https://www.facebook.com/sharer/sharer.php?u=https://creedthoughts.herokuapp.com/blog/<%=articles[0].heading%>" target="_blank"><i class="fa fa-facebook"></i></a>
+                  <a href="#" onclick="copylink()"><i class="fa fa-link"></i></a>
+                  <input class="d-none" type="text" id="copyLink" name="copyLink" value="">
                 </div>
               </div>
             </div>
           </div>
           <div class="col-md-2">
-            <div class="">
+            <div class="d-none d-sm-none d-md-block d-lg-block">
               <div class="card-1" data-aos="fade-down">
                 <div class="card-1-img">
                   <img src="/images/img1.jpg" alt="">
@@ -171,14 +175,42 @@
     <footer id="footer"></footer>
 
     <script type="text/javascript">
- $(document).ready(function(){
- $("#header").load("/components/header.html");
- $("#footer").load("/components/footer.html");
-  $("#home").addClass("active");})
+    $(document).ready(function(){
+    $("#header").load("/components/header.html");
+    $("#footer").load("/components/footer.html");
+    $("#home").addClass("active");})
+    </script>
+    <script type="text/javascript">
+    window.onscroll = function() {myFunction2()};
+    var sideimg = document.getElementById("sideimg");
+    var sticky = -1*(sideimg.offsetTop);
+    function myFunction2() {
+    if (window.pageYOffset > sticky) {
+      sideimg.classList.add("sticky-image");
+    } else {
+      sideimg.classList.remove("sticky-image");
+    }
+    }
     </script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
       AOS.init({once: true});
+    </script>
+    <script type="text/javascript">
+    window.onscroll = function() {sideimage()};
+    var sideimg = document.getElementById("sideimg");
+    var set = document.getElementById("mainimg").offsetTop;
+    function sideimage() {
+      console.log(set);
+      console.log(window.pageYOffset);
+    if (window.pageYOffset > set) {
+      sideimg.classList.remove("d-none");
+      sideimg.classList.add("d-block");
+    } else {
+      sideimg.classList.remove("d-block");
+      sideimg.classList.add("d-none");
+    }
+    }
     </script>
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

@@ -546,9 +546,17 @@ a:hover{
 }
 .share-link a{
   font-size: 22px;
-  padding-left: 20px;
-  transition: 1s;
+  padding: 0 10px 0 10px;
+  transition: color .5s;
 }
 .share-link a:hover{
   color: #ff006d;
+  background-color: #f062;
+}
+#sideimg{
+  opacity: 0;
+  transition: .5s;
+}
+.skicky-image{
+  opacity: 1;
 }
