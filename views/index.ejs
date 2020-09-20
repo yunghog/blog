@@ -128,21 +128,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="">
-                  <%for(m=0;m<topics.length,topics[m]._id.active==1;m++){%>
-                    <h5>
-                      <%=topics[m]._id.topic%>
-                    </h5>
-                  <%}%>
-                </div>
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-3">
-
             </div>
           </div>
         </div>
@@ -162,12 +148,6 @@
                     <%for(m=0;m<topics.length,topics[m]._id.active==1;m++){%>
                     <a href="/blog?topic=<%=topics[m]._id.topic%>"><button><%=topics[m]._id.topic%></button></a>
                     <%}%>
-                    <!-- <a href="/blog"><button>all</button></a>
-                    <a href="/blog?topic=tech"><button>tech</button></a>
-                    <a href="/blog?topic=gaming"><button>gaming</button></a>
-                    <a href="/blog?topic=cars"><button>cars</button></a>
-                    <a href="/blog?topic=coding"><button>coding</button></a>
-                    <a href="/blog?topic=music"><button>music</button></a> -->
                   </div>
                 </div>
               </div>
