@@ -365,14 +365,14 @@ input[type=file]::-webkit-file-upload-button{
   margin-top: 50px;
   border-radius: 15px;
   /* padding: 10px; */
-  box-shadow: 0 0 15px #5555;
+  box-shadow: 10px 10px 15px #5553;
 }
 .card-1-img{
   width: 100%;
 }
 .card-1-img img{
   width: 100%;
-  border-radius: 15px;
+  border-radius: 15px 15px 0px 0px;
 }
 .card-1-body{
   padding: 10px;
@@ -543,4 +543,12 @@ a:hover{
   opacity: 0;
   visibility: hidden;
   transition: 1s ease;
+}
+.share-link a{
+  font-size: 22px;
+  padding-left: 20px;
+  transition: 1s;
+}
+.share-link a:hover{
+  color: #ff006d;
 }

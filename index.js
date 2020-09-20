@@ -61,8 +61,16 @@ router.get('/',function(req, res){
     var mysort={_id:-1};
     blogs.find({active: 1}).sort(mysort).toArray()
     .then(results=>{
+      blogs.aggregate([
+        {$group: {_id:{
+          "topic": "$topic",
+          "active": "$active",
+        }}}
+    ]).toArray(function(error, avail_topics){
+      console.log(avail_topics[0]._id.topic);
       console.log(results);
-      res.render('index.ejs',{articles:results})
+      res.render('index.ejs',{articles:results,topics:avail_topics})
+  });
     })
   });
 });
@@ -238,6 +246,20 @@ app.get('/blog/:heading',function(req, res){
 app.post('/logout',function(req,res){
   req.session.loggedin=false;
   res.redirect('/login');
+});
+app.get('/groupby',function(req,res){
+  MongoClient.connect(dbURL, {useUnifiedTopology: true}, (err, client)=>{
+    if(err) return console.error(err);
+    const db = client.db('creedthoughts');
+    const topic = db.collection('blogs');
+    topic.aggregate([
+      {"$group" : {_id:"$topic"}}
+  ]).toArray(function(error, fetchAllTopUsers){
+    console.log(fetchAllTopUsers);
+});
+  });
+
+  res.redirect('/');
 });
 app.post('/sendMail', urlencodedParser, function(req,res){
      response = {name:req.body.name,
