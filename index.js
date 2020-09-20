@@ -237,7 +237,7 @@ app.get('/blog/:heading',function(req, res){
       blogs.find(query).sort(mysort).toArray()
       .then(results=>{
         var recent_topic = results[0].topic;
-        blogs.find({topic:recent_topic,heading: {$ne: req.params.heading}}).sort(mysort).toArray().then(recents=>{
+        blogs.find({topic:recent_topic,heading: {$ne: req.params.heading},active:1}).sort(mysort).toArray().then(recents=>{
           res.render('blog-single.ejs',{articles:results, recents:recents});
         })
       });
